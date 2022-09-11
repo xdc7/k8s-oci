@@ -12,40 +12,40 @@ resource "kubernetes_namespace" "free_namespace" {
   }
 }
 
-# Create a k8s deployment for nginx
-resource "kubernetes_deployment" "nginx_deployment" {
-  metadata {
-    name = "nginx"
-    labels = {
-      app = "nginx"
-    }
-    namespace = kubernetes_namespace.free_namespace.id
-  }
-  spec {
-    replicas = 1
-    selector {
-      match_labels = {
-        app = "nginx"
-      }
-    }
-    template {
-      metadata {
-        labels = {
-          app = "nginx"
-        }
-      }
-      spec {
-        container {
-          image = "nginx"
-          name  = "nginx"
-          port {
-            container_port = 80
-          }
-        }
-      }
-    }
-  }
-}
+# # Create a k8s deployment for nginx
+# resource "kubernetes_deployment" "nginx_deployment" {
+#   metadata {
+#     name = "nginx"
+#     labels = {
+#       app = "nginx"
+#     }
+#     namespace = kubernetes_namespace.free_namespace.id
+#   }
+#   spec {
+#     replicas = 1
+#     selector {
+#       match_labels = {
+#         app = "nginx"
+#       }
+#     }
+#     template {
+#       metadata {
+#         labels = {
+#           app = "nginx"
+#         }
+#       }
+#       spec {
+#         container {
+#           image = "nginx"
+#           name  = "nginx"
+#           port {
+#             container_port = 80
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
 
 
 # Create a NodePort service for the NLB
